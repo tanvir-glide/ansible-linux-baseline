@@ -217,6 +217,8 @@ linux_baseline_pub_key: "~/.ssh/id_ed25519.pub"      # Path to ssh public key
 linux_baseline_ssh_port: "2222"                      # Set your custom ssh port
 ```
 
+> Note: If linux_baseline_username is left as your_username, the user-creation and key-deploy steps are skipped
+
 ---
 
 ### 5. Run the Ansible playbook

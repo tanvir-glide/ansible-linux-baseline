@@ -28,3 +28,19 @@
     state: absent
   notify: Restart ssh service
   tags: ssh
+
+- name: Ensure target user exists in admin group
+  ansible.builtin.user:
+    name: "{{ linux_baseline_username }}"
+    groups: "{{ linux_baseline_admin_group }}"
+    append: true
+    shell: /bin/bash
+  when: linux_baseline_username != "your_username"
+  tags: ssh
+
+- name: Deploy public key for target user
+  ansible.posix.authorized_key:
+    user: "{{ linux_baseline_username }}"
+    key: "{{ lookup('file', linux_baseline_pub_key) }}"
+  when: linux_baseline_username != "your_username"
+  tags: ssh
