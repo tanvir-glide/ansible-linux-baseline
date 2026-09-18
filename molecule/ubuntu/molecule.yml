@@ -15,7 +15,8 @@ platforms:
       - SYS_ADMIN
     volumes:
       - /sys/fs/cgroup:/sys/fs/cgroup:rw
-    cgroupns_mode: host
+    extra_opts:
+      - "--cgroupns=host"
 
 provisioner:
   name: ansible
