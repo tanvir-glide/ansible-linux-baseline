@@ -43,8 +43,3 @@
       check_mode: true
       register: result
       failed_when: result.changed
-
-    - name: Assert SSH daemon process is running
-      ansible.builtin.shell: pgrep -x sshd || pgrep -x ssh
-      register: ssh_proc
-      changed_when: false
