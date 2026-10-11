@@ -45,7 +45,7 @@
       failed_when: result.changed
 
     - name: Assert SSH service is running and enabled
-      ansible.builtin.systemd:
-        name: ssh
-      register: ssh_service
-      failed_when: not (ssh_service.status.ActiveState == "active" and ssh_service.status.UnitFileState == "enabled")
+      ansible.builtin.service:
+        name: "{{ 'ssh' if ansible_facts['os_family'] == 'Debian' else 'sshd' }}"
+        state: started
+        enabled: true
