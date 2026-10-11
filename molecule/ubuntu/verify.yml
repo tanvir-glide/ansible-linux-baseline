@@ -28,7 +28,7 @@
 
     - name: Assert SSH uses custom port
       ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config
+        path: /etc/ssh/sshd_config.d/00-baseline.conf
         line: "Port {{ linux_baseline_ssh_port | default(22) }}"
         state: present
       check_mode: true
