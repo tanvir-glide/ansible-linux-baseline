@@ -19,3 +19,7 @@
   ansible.builtin.systemd:
     daemon_reload: true
   failed_when: false
+
+- name: Reload sysctl
+  ansible.builtin.command: sysctl --system
+  changed_when: true
