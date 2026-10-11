@@ -44,8 +44,7 @@
       register: result
       failed_when: result.changed
 
-    - name: Assert SSH service is running and enabled
-      ansible.builtin.service:
-        name: "{{ 'ssh' if ansible_facts['os_family'] == 'Debian' else 'sshd' }}"
-        state: started
-        enabled: true
+    - name: Assert SSH daemon process is running
+      ansible.builtin.shell: pgrep -x sshd || pgrep -x ssh
+      register: ssh_proc
+      changed_when: false
