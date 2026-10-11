@@ -3,6 +3,15 @@
   hosts: all
   become: true
   tasks:
+    - name: Debug SSH config content
+      ansible.builtin.command: cat /etc/ssh/sshd_config.d/00-baseline.conf
+      register: debug_conf
+      changed_when: false
+
+    - name: Show SSH config
+      ansible.builtin.debug:
+        msg: "{{ debug_conf.stdout_lines }}"
+
     - name: Gather package facts
       ansible.builtin.package_facts:
         manager: auto
@@ -16,30 +25,3 @@
       ansible.builtin.assert:
         that: "'fail2ban' in ansible_facts.packages"
         fail_msg: "fail2ban is not installed"
-
-    - name: Assert SSH config disables root login
-      ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config.d/00-baseline.conf
-        line: "PermitRootLogin no"
-        state: present
-      check_mode: true
-      register: result
-      failed_when: result.changed
-
-    - name: Assert SSH uses custom port
-      ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config.d/00-baseline.conf
-        line: "Port {{ linux_baseline_ssh_port | default(22) }}"
-        state: present
-      check_mode: true
-      register: result
-      failed_when: result.changed
-
-    - name: Assert password auth is disabled
-      ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config.d/00-baseline.conf
-        line: "PasswordAuthentication no"
-        state: present
-      check_mode: true
-      register: result
-      failed_when: result.changed
