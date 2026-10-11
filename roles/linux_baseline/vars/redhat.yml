@@ -4,6 +4,7 @@ linux_baseline_packages:
   - vim
   - openssh-server
   - fail2ban
+  - python3-systemd
   - dnf-automatic
   - firewalld
 

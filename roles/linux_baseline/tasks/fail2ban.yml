@@ -6,19 +6,18 @@
   tags: security
 
 - name: Configure fail2ban
-  ansible.builtin.blockinfile:
-    path: /etc/fail2ban/jail.d/sshd.conf
-    create: true
+  ansible.builtin.copy:
+    dest: /etc/fail2ban/jail.d/sshd.conf
     mode: "0644"
-    block: |
+    content: |
       [sshd]
       enabled  = true
+      backend  = systemd
       port     = {{ linux_baseline_ssh_port }}
-      filter   = sshd
-      logpath  = {{ linux_baseline_auth_log }}
       maxretry = 5
       bantime  = 24h
       findtime = 10m
+      ignoreip = 127.0.0.1/8 ::1 100.64.0.0/10
   notify: Restart fail2ban service
   tags: security
 
