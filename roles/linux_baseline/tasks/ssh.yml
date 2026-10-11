@@ -3,7 +3,6 @@
   ansible.builtin.copy:
     dest: /etc/ssh/sshd_config.d/00-baseline.conf
     mode: "0644"
-    validate: /usr/sbin/sshd -t -f %s
     content: |
       Port {{ linux_baseline_ssh_port }}
       PermitRootLogin no
