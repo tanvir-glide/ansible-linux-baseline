@@ -24,7 +24,7 @@
 
     - name: Assert SSH config disables root login
       ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config
+        path: /etc/ssh/sshd_config.d/00-baseline.conf
         line: "PermitRootLogin no"
         state: present
         check_mode: true
@@ -33,7 +33,7 @@
 
     - name: Assert SSH uses custom port
       ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config
+        path: /etc/ssh/sshd_config.d/00-baseline.conf
         line: "Port 2222"
         state: present
         check_mode: true
@@ -42,7 +42,7 @@
 
     - name: Assert password auth is disabled
       ansible.builtin.lineinfile:
-        path: /etc/ssh/sshd_config
+        path: /etc/ssh/sshd_config.d/00-baseline.conf
         line: "PasswordAuthentication no"
         state: present
         check_mode: true
