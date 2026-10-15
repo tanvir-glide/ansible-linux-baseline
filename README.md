@@ -49,7 +49,6 @@ After a successful run the server will have:
 ├── CHANGELOG.md
 ├── docs
 │   └── MANUAL_SETUP.md
-├── generate-changelog.py
 ├── LICENSE
 ├── molecule
 │   ├── rocky
@@ -95,7 +94,7 @@ After a successful run the server will have:
 
 ### 1. Server Pre-configuration
 
-To ensure maximum security, we will manually harden ssh to disable password authentication *before* granting Ansible its required deployment privileges. 
+To ensure maximum security, we will manually harden ssh to disable password authentication *before* granting Ansible its required deployment privileges.
 
 Follow this exact sequence:
 
@@ -133,8 +132,8 @@ sudo sed -i 's/^#\?PasswordAuthentication.*/PasswordAuthentication no/' /etc/ssh
 # If you are on ubuntu, please also delete the 50-cloud-init.conf as well to let it not override the sshd_config
 sudo rm /etc/ssh/sshd_config.d/50-cloud-init.conf
 
-# Finally restart the ssh or sshd for rhel 
-sudo systemctl restart ssh ; sudo systemctl restart sshd 
+# Finally restart the ssh or sshd for rhel
+sudo systemctl restart ssh ; sudo systemctl restart sshd
 ```
 
 #### Step 4: Test login via ssh key
@@ -305,7 +304,7 @@ This playbook is tested using [Molecule](https://ansible.readthedocs.io/projects
 
 ### [Lynis by Cisofy](https://github.com/cisofy/lynis) - The open-source security auditing tool to benchmark and guide these hardening configurations
 
-### [Linux Audit Blog](https://linux-audit.com) - A valuable resource website for in-depth technical guide for standard Linux system hardening practices.  
+### [Linux Audit Blog](https://linux-audit.com) - A valuable resource website for in-depth technical guide for standard Linux system hardening practices.
 
 ---
 
