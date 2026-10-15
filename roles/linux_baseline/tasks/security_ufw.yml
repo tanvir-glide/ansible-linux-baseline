@@ -34,11 +34,6 @@
     proto: tcp
   tags: security
 
-- name: Enable ufw
-  community.general.ufw:
-    state: enabled
-  tags: security
-
 - name: Configure automatic updates (Debian)
   when: ansible_facts['os_family'] == "Debian"
   block:
